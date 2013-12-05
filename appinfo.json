@@ -1,0 +1,24 @@
+{
+    "versionLabel": "1.0",
+    "uuid": "4db9b1be-622c-4292-87e5-b188e8021484",
+    "appKeys": {},
+    "longName": "EVRY",
+    "versionCode": 1,
+    "capabilities": [
+        ""
+    ],
+    "shortName": "EVRY",
+    "companyName": "bleakgadfly",
+    "watchapp": {
+        "watchface": true
+    },
+    "resources": {
+        "media": [
+            {
+                "type": "png",
+                "name": "PEBBLE_EVRY_IMG",
+                "file": "images/pebble_evry.png"
+            }
+        ]
+    }
+}
