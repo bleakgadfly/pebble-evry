@@ -1,7 +1,8 @@
 Pebble.addEventListener("ready",
 	function(e) {			
+		console.log("JS Loaded");
 		// Create interval
-		var req = new XMLHttpRequest();
+		/** var req = new XMLHttpRequest();
   		req.open('GET', 'http://www.netfonds.no/quotes/paperhistory.php?paper=EVRY.OSE&csv_format=csv', true);
   		req.onload = function(e) {
 			if (req.readyState == 4 && req.status == 200) {
@@ -16,6 +17,6 @@ Pebble.addEventListener("ready",
 			}
   		}
 	
-  		req.send(null);
+  		req.send(null); **/
 	}									
 );
