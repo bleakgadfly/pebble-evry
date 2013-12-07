@@ -10,10 +10,16 @@
     "shortName": "EVRY",
     "companyName": "bleakgadfly",
     "watchapp": {
-        "watchface": true
+        "watchface": false
     },
     "resources": {
         "media": [
+            {
+                "menuIcon": true,
+                "type": "png",
+                "name": "PEBBLE_EVRY_MENU_LOGO",
+                "file": "images/evry_menu_logo.png"
+            },
             {
                 "type": "png",
                 "name": "PEBBLE_EVRY_IMG",
