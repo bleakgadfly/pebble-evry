@@ -10,7 +10,7 @@
     "shortName": "EVRY",
     "companyName": "bleakgadfly",
     "watchapp": {
-        "watchface": false
+        "watchface": true
     },
     "resources": {
         "media": [

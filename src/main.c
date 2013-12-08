@@ -8,6 +8,7 @@ static BitmapLayer *logo_bitmap_layer;
 static GBitmap *logo_gbitmap_container;
 static TextLayer *stock_quote_text_layer;
 static TextLayer *time_text_layer;
+
 //static BitmapLayer *arrow_bitmap_layer;
 //static GBitmap *arrow_gbitmap_container;
 
@@ -21,20 +22,28 @@ static TextLayer *time_text_layer;
 
 //void minute_tick_handler(struct tm *tick_time, TimeUnits units_changed) {
 //	static char time_text[] = "00:00";
-//	static char date_text[] = "";
 //}
 
 static void text_layer_set_defaults(TextLayer *text_layer) {
-	text_layer_set_text_color(text_layer, GColorWhite);
-	text_layer_set_background_color(text_layer, GColorBlack);
+	text_layer_set_text_color(text_layer, GColorBlack);
+	text_layer_set_background_color(text_layer, GColorWhite);
 	text_layer_set_text_alignment(text_layer, GTextAlignmentCenter);
 	text_layer_set_font(text_layer, fonts_get_system_font(FONT_KEY_ROBOTO_CONDENSED_21));
 }
 
 static Layer* evry_logo_get_layer(GRect *rootBounds) {
 	logo_gbitmap_container = gbitmap_create_with_resource(RESOURCE_ID_PEBBLE_EVRY_IMG);
-	logo_bitmap_layer = bitmap_layer_create((*rootBounds));
 	
+	int middleOfScreen = rootBounds->size.h / 2;
+	int halfSizeOfLogo = logo_gbitmap_container->bounds.size.h / 2;
+	int logoBeginPosition = middleOfScreen - halfSizeOfLogo;
+	
+	GRect bounds = { 
+		.origin = { .x = 0, .y = logoBeginPosition	},
+		.size = logo_gbitmap_container->bounds.size
+	};
+	
+	logo_bitmap_layer = bitmap_layer_create(bounds)
 	bitmap_layer_set_bitmap(logo_bitmap_layer, logo_gbitmap_container);
 	bitmap_layer_set_alignment(logo_bitmap_layer, GAlignCenter);
 	Layer *logo_layer = bitmap_layer_get_layer(logo_bitmap_layer);
@@ -44,7 +53,7 @@ static Layer* evry_logo_get_layer(GRect *rootBounds) {
 
 static Layer* stock_quote_get_layer(GRect *rootBounds) {
 	GRect stock_quote_bounds = { 
-		.origin = { .x = rootBounds->origin.x, .y = 10 }, 
+		.origin = { .x = 0, .y = 10 }, 
 		.size = { .h = 30, .w = rootBounds->size.w }
 	};
 			
@@ -73,19 +82,17 @@ static Layer* time_layer_get_layer(GRect *rootBounds) {
 static void app_init(void) {
 	window = window_create();
 	window_stack_push(window, false);
-	window_set_background_color(window, GColorBlack);
+	window_set_background_color(window, GColorWhite);
 	Layer *window_layer = window_get_root_layer(window);
-
 	GRect bounds = layer_get_frame(window_layer);
 
-	
 	Layer *logo_layer = evry_logo_get_layer(&bounds);
 	Layer *stock_quote_layer = stock_quote_get_layer(&bounds);
 	Layer *time_layer = time_layer_get_layer(&bounds);
 
-	layer_add_child(logo_layer, stock_quote_layer);		
-	layer_add_child(logo_layer, time_layer);
 	layer_add_child(window_layer, logo_layer);
+	layer_add_child(window_layer, time_layer);
+	layer_add_child(window_layer, stock_quote_layer);			
 	
 	//tick_timer_service_subscribe(MINUTE_UNIT, minute_tick_handler);
 	//app_message_register_inbox_received(message_handler);
