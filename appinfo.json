@@ -1,7 +1,10 @@
 {
     "versionLabel": "1.0",
     "uuid": "4db9b1be-622c-4292-87e5-b188e8021484",
-    "appKeys": {},
+    "appKeys": {
+        "stock_quote": 2,
+        "increased_value": 1
+    },
     "longName": "EVRY",
     "versionCode": 1,
     "capabilities": [
@@ -10,7 +13,7 @@
     "shortName": "EVRY",
     "companyName": "bleakgadfly",
     "watchapp": {
-        "watchface": true
+        "watchface": false
     },
     "resources": {
         "media": [
@@ -19,6 +22,16 @@
                 "type": "png",
                 "name": "PEBBLE_EVRY_MENU_LOGO",
                 "file": "images/evry_menu_logo.png"
+            },
+            {
+                "type": "png",
+                "name": "DOWN_ARROW",
+                "file": "images/downarrow.png"
+            },
+            {
+                "type": "png",
+                "name": "UP_ARROW",
+                "file": "images/uparrow.png"
             },
             {
                 "type": "png",
