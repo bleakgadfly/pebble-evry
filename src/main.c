@@ -39,11 +39,11 @@ static Layer* evry_logo_get_layer(GRect *rootBounds) {
 	int logoBeginPosition = middleOfScreen - halfSizeOfLogo;
 	
 	GRect bounds = { 
-		.origin = { .x = 0, .y = logoBeginPosition	},
+		.origin = { .x = rootBounds->origin.x, .y = logoBeginPosition	},
 		.size = logo_gbitmap_container->bounds.size
 	};
 	
-	logo_bitmap_layer = bitmap_layer_create(bounds)
+	logo_bitmap_layer = bitmap_layer_create(bounds);
 	bitmap_layer_set_bitmap(logo_bitmap_layer, logo_gbitmap_container);
 	bitmap_layer_set_alignment(logo_bitmap_layer, GAlignCenter);
 	Layer *logo_layer = bitmap_layer_get_layer(logo_bitmap_layer);
@@ -53,7 +53,7 @@ static Layer* evry_logo_get_layer(GRect *rootBounds) {
 
 static Layer* stock_quote_get_layer(GRect *rootBounds) {
 	GRect stock_quote_bounds = { 
-		.origin = { .x = 0, .y = 10 }, 
+		.origin = { .x = rootBounds->origin.x, .y = rootBounds->origin.y + 10 }, 
 		.size = { .h = 30, .w = rootBounds->size.w }
 	};
 			
