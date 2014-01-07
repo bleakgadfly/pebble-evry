@@ -20,13 +20,13 @@ void message_handler(DictionaryIterator *iterator, void *context)
 	if(has_increased_value) {
 		switch(has_increased_value->value->int8)
 		{
-			case 0: // Has not changed
-				break;
 			case 1: // Has increased since previously
 				bitmap_layer_set_bitmap(arrow_bitmap_layer, up_arrow_gbitmap_container);
 				break;
 			case 2: // Has decreased in value
 				bitmap_layer_set_bitmap(arrow_bitmap_layer, down_arrow_gbitmap_container);
+				break;
+			default: 
 				break;
 		}
 	}
@@ -52,16 +52,13 @@ void text_layer_set_defaults(TextLayer *text_layer)
 
 Layer* arrow_layer_get_layer(const GRect *rootBounds) 
 {
-	
 	GRect arrowBounds = {
 		.size = up_arrow_gbitmap_container->bounds.size,
 		.origin = { .x = 0, .y = 10 }
 	};
 	
-	arrow_bitmap_layer = bitmap_layer_create(arrowBounds);
-	Layer* arrow_layer = bitmap_layer_get_layer(arrow_bitmap_layer);
-	
-	return arrow_layer;
+	arrow_bitmap_layer = bitmap_layer_create(arrowBounds);	
+	return bitmap_layer_get_layer(arrow_bitmap_layer);
 }
 
 Layer* evry_logo_layer_get_layer(const GRect *rootBounds) 
@@ -77,10 +74,8 @@ Layer* evry_logo_layer_get_layer(const GRect *rootBounds)
 	
 	logo_bitmap_layer = bitmap_layer_create(bounds);
 	bitmap_layer_set_bitmap(logo_bitmap_layer, logo_gbitmap_container);
-	bitmap_layer_set_alignment(logo_bitmap_layer, GAlignCenter);
-	Layer *logo_layer = bitmap_layer_get_layer(logo_bitmap_layer);
-	
-	return logo_layer;
+	bitmap_layer_set_alignment(logo_bitmap_layer, GAlignCenter);	
+	return bitmap_layer_get_layer(logo_bitmap_layer);
 }
 
 Layer* stock_quote_layer_get_layer(const GRect *rootBounds) 
@@ -91,10 +86,8 @@ Layer* stock_quote_layer_get_layer(const GRect *rootBounds)
 	};	
 	
 	stock_quote_text_layer = text_layer_create(stock_quote_bounds);
-	text_layer_set_defaults(stock_quote_text_layer);	
-	Layer *stock_quote_layer = text_layer_get_layer(stock_quote_text_layer);
-	
-	return stock_quote_layer;
+	text_layer_set_defaults(stock_quote_text_layer);		
+	return text_layer_get_layer(stock_quote_text_layer);
 }
 
 Layer* time_layer_get_layer(const GRect *rootBounds) 
@@ -106,10 +99,8 @@ Layer* time_layer_get_layer(const GRect *rootBounds)
 	
 	time_text_layer = text_layer_create(time_rect);
 	text_layer_set_defaults(time_text_layer);
-	text_layer_set_font(time_text_layer, fonts_get_system_font(FONT_KEY_BITHAM_42_BOLD));
-	Layer *time_layer = text_layer_get_layer(time_text_layer);
-	
-	return time_layer;
+	text_layer_set_font(time_text_layer, fonts_get_system_font(FONT_KEY_BITHAM_42_BOLD));	
+	return text_layer_get_layer(time_text_layer);
 }
 
 static void app_init(void) 
